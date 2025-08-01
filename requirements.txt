@@ -1,0 +1,2 @@
+sshtunnel==0.4.0
+pick==2.2.0
