@@ -92,12 +92,21 @@ python main.py --backup [--config 配置文件名]
 # 检查备份状态
 python main.py --check [--config 配置文件名]
 
-# 创建Windows计划任务（需要管理员权限）
-python main.py --schedule
+# 创建计划任务
+Windows: python main.py --schedule    # 需要管理员权限
+Linux:   python main.py --schedule    # 需要 crontab 权限
 
 # 交互式恢复数据库备份
 python main.py --recovery
 ```
+
+### 计划任务说明
+- Windows 系统：在任务计划程序中创建任务
+- Linux 系统：在 crontab 中创建定时任务
+- 创建的任务：
+  - 备份任务：按配置的时间每天执行备份
+  - 状态检查任务：按配置的时间检查备份状态
+- 创建新任务时会自动清理旧的任务
 
 ### 命令行参数
 

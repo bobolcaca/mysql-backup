@@ -92,12 +92,21 @@ python main.py --backup [--config config_name]
 # Check backup status
 python main.py --check [--config config_name]
 
-# Create Windows scheduled task (requires admin privileges)
-python main.py --schedule
+# Create scheduled tasks
+Windows: python main.py --schedule    # Requires administrator privileges
+Linux:   python main.py --schedule    # Requires crontab permissions
 
 # Interactive database recovery
 python main.py --recovery
 ```
+
+### Scheduled Tasks
+- On Windows: Creates tasks in Windows Task Scheduler
+- On Linux: Creates crontab entries
+- Tasks created:
+  - Backup task: Runs daily backup at configured time
+  - Status check task: Checks backup status at configured time
+- Automatically removes old tasks before creating new ones
 
 ### Command Line Arguments
 
