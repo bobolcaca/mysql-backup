@@ -1,5 +1,6 @@
 import os
 import datetime
+from ..utils.platform_utils import PlatformUtils
 import shutil
 import gzip
 import subprocess
@@ -66,8 +67,8 @@ def perform_backup_for_config(config: FullConfig, args):
         server_version = get_remote_mysql_version(config, args)
 
         # 构建mysqldump命令
-        mysqldump_path = os.path.join(
-            config.backup.mysql_bin_dir, "mysqldump.exe")
+        mysqldump_path = PlatformUtils.get_mysql_executable(
+            config.backup.mysql_bin_dir, "mysqldump")
 
         # 检查客户端版本兼容性
         client_version = get_mysqldump_version(mysqldump_path)

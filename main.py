@@ -6,7 +6,7 @@ import sys
 
 from src.config.loader import load_configs
 from src.utils.logger import setup_logger
-from src.utils.scheduler import create_windows_task
+from src.utils.scheduler import create_scheduled_task
 from src.backup.core import process_config
 from src.backup.recovery import (
     perform_recovery, 
@@ -23,7 +23,7 @@ def main():
     parser.add_argument('--backup', action='store_true', help='执行备份操作')
     parser.add_argument('--check', action='store_true', help='检查备份状态并发送警报')
     parser.add_argument('--schedule', action='store_true',
-                        help='创建Windows计划任务（需要管理员权限）')
+                        help='创建计划任务（Windows下需要管理员权限，Linux下需要crontab权限）')
     parser.add_argument('--recovery', action='store_true', help='交互式恢复数据库备份')
     parser.add_argument('--debug', action='store_true',
                         help='调试模式，显示完整命令（不脱敏）')
@@ -48,7 +48,7 @@ def main():
 
     # 计划任务创建功能
     if args.schedule:
-        create_windows_task(configs)
+        create_scheduled_task(configs)
         return
 
     # 数据库恢复功能

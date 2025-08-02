@@ -25,9 +25,9 @@ def get_db_variables(config: FullConfig, args) -> Dict[str, str]:
         'sql_mode'
     ]
     
-    query = "SELECT VARIABLE_NAME, VARIABLE_VALUE FROM information_schema.GLOBAL_VARIABLES WHERE VARIABLE_NAME IN ({})".format(
-        ','.join([f"'{v}'" for v in variables_to_check])
-    )
+    # 使用 SHOW VARIABLES 命令替代 information_schema 查询
+    variables_clause = ' OR '.join([f"Variable_name = '{v}'" for v in variables_to_check])
+    query = f"SHOW GLOBAL VARIABLES WHERE {variables_clause}"
     
     cmd = [
         mysql_path,
